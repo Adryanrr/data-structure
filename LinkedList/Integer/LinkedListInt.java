@@ -1,7 +1,5 @@
 package LinkedList.Integer;
 
-import LinkedList.No;
-
 public class LinkedListInt {
     public Node head;
     public int size;
@@ -43,7 +41,7 @@ public class LinkedListInt {
         return true;
     }
 
-    public void GetAllInt() {
+    public void getAllInt() {
         Node current = head;
 
         if (head == null) {
@@ -57,41 +55,44 @@ public class LinkedListInt {
         System.out.println("-> NULL");
     }
 
-    private int countPair() {
-        Node current = head;
-        int pair = 0;
-        while (current != null) {
-            if (current.value % 2 == 0) {
-                pair++;
-            }
-        }
-        return pair;
-    }
-
     public void OrderToPair() {
         if (head == null || head.next == null) {
-            System.out.println("Não foi possivel ordenar");
+            System.out.println("Não foi possível ordenar");
             return;
         }
 
-        int pair = countPair();
-        Node current = head;
+        Node dummyHead = new Node(0); // Nó fictício para facilitar operações
+        dummyHead.next = head;
 
-        while (pair != 0) {
-            Node end = head;
-            if (current.value % 2 == 0) {
-                Node toEnd = current;
-                while (toEnd.next != null) {
-                    toEnd = toEnd.next;
-                }
-                end.next = current;
-                pair--;
-            }
-            head = current.next;
-            end = current;
-
+        Node tail = head;
+        // Primeiro, encontra o último nó da lista original
+        while (tail.next != null) {
+            tail = tail.next;
         }
 
-    }
+        Node originalTail = tail; // Para saber até onde iterar
+        Node prev = dummyHead;
+        Node current = head;
 
+        while (current != null && current != originalTail.next) {
+            if (current.value % 2 == 0) {
+                // Remove current da posição atual
+                prev.next = current.next;
+
+                // Move current para o final
+                tail.next = current;
+                current.next = null;
+                tail = current;
+
+                // Avança para o próximo nó (após o anterior current)
+                current = prev.next;
+            } else {
+                prev = current;
+                current = current.next;
+            }
+        }
+
+        head = dummyHead.next;
+        getAllInt();
+    }
 }

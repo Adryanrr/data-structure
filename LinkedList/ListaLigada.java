@@ -75,7 +75,7 @@ public class ListaLigada<TYPE> {
                     if (atual == primeiro)
                         primeiro = anterior;
                 }
-                this.tamanho++;
+                this.tamanho--;
                 return;
             }
 
@@ -109,42 +109,4 @@ public class ListaLigada<TYPE> {
         System.out.println(" -> NULL");
     }
 
-    private int contarPares() {
-        No<TYPE> atual = primeiro;
-        int pares = 0;
-        while (atual != null) {
-            Integer valor = (Integer) atual.getValor();
-            if (valor % 2 == 0) {
-                pares++;
-            }
-        }
-        return pares;
-    }
-
-    public void OrderToEnd() {
-        if (primeiro == null || primeiro.getProximo() == null)
-            return;
-        // Verifica se TYPE é Integer — safe cast
-        if (primeiro.getValor() instanceof Integer) {
-            int pares = contarPares();
-            while (pares != 0) { // numero de vezes que vai executar a ordenaćão
-                Integer valor = (Integer) primeiro.getValor();
-                No<TYPE> atual = primeiro;
-                if (valor % 2 == 0) {
-                    No<TYPE> end = atual;
-                    while (end.getProximo() != null) {
-                        end = end.getProximo();
-                    }
-                    end.setProximo(atual);
-                    primeiro = atual.getProximo();
-                    atual.setProximo(null);
-                }
-
-            }
-            // Atualizar a head.
-            // ligar a sequencia.
-            pares--;
-        }
-        getAll();
-    }
 }
