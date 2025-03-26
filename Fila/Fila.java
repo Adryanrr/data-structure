@@ -1,13 +1,3 @@
-class No<T> {
-    T valor;
-    No<T> prox;
-
-    public No(T valor) {
-        this.valor = valor;
-        this.prox = null;
-    }
-}
-
 public class Fila<T> {
     No<T> head, tail;
     int tamanho;
@@ -73,9 +63,9 @@ public class Fila<T> {
         fila.enqueue("Whuanderson");
         fila.enqueue("Felipe");
 
-        fila.printQueue(); // Saída esperada: Adryan Andre Whuanderson Felipe
+        fila.printQueue();
 
-        for (int i = 0; i < 4; i++) { // Corrigido para evitar erro de indexação
+        for (int i = 0; i < fila.tamanho; i++) {
             fila.dequeue();
             fila.printQueue();
         }
