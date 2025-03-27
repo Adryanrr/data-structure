@@ -76,12 +76,9 @@ public class ListaEncadeada<T> {
     }
 
     public static void main(String[] args) {
-        ListaEncadeada<Integer> lista = new ListaEncadeada<>();
-        lista.adicionar(0, 10);
-        lista.adicionar(1, 20);
-        lista.adicionar(2, 30);
-        lista.imprimir();
-        lista.remover(1);
+        ListaEncadeada<String> lista = new ListaEncadeada<>();
+        lista.adicionar(0, "Savio");
+        lista.adicionar(0, "Lucas Pit");
         lista.imprimir();
     }
 }
