@@ -24,6 +24,7 @@ public class Deque<T> {
             tail = novo;
         } else {
             novo.prox = head;
+            head.ant = novo;
             head = novo;
         }
         tamanho++;
@@ -44,7 +45,7 @@ public class Deque<T> {
         } else {
             head = head.prox;
         }
-
+        tamanho--;
         return elemento;
     }
 
@@ -62,20 +63,24 @@ public class Deque<T> {
         return true;
     }
 
-    public No<T> firstRiht() {
-        return head;
+    public No<T> firstRight() {
+        return tail;
     }
 
     public No<T> removeRight() {
+        if (this.tamanho == 0) {
+            throw new NullPointerException("erro, deque está vazio");
+        }
+
         No<T> elemento = tail;
-        if (tail == null) {
-            System.out.println("Lista Vazia");
-            return null;
-        } else if (tail == head) {
-            tail = null;
+
+        if (tail == head) {
             head = null;
+            tail = null;
         } else {
-            tail.ant = tail;
+            tail = tail.ant;
+            tail.prox = null;
+            elemento.ant = null;
         }
         tamanho--;
         return elemento;
@@ -103,7 +108,10 @@ public class Deque<T> {
 
         domino.pecaNaMesa();
 
-        domino.removeLeft();
+        // domino.removeLeft();
+        domino.removeRight();
+        domino.removeRight();
+        domino.removeRight();
         domino.removeRight();
 
         domino.pecaNaMesa();
